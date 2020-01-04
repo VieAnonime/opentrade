@@ -10,41 +10,6 @@ Step-by-step install instructions:
 3. Log in to Droplet over SSH (You will receive a email with IP, username and password)
 4
 
-```
-[sudo] apt-get update
-[sudo] apt-get install build-essential libssl-dev curl -y
-curl -sL https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh -o install_nvm.sh
-bash install_nvm.sh
-[sudo] reboot
-
-nvm install 12.6.0
-
-git clone --recurse-submodules https://github.com/3s3s/opentrade.git
-cd opentrade/accountsserver
-git checkout master
-cd ..
-
-[sudo] npm install 
-[sudo] npm install -g forever
-```
-
-## Here is an example of the file ~/opentrade/server/modules/private_constants.js Edit with your configs.
-```
-'use strict';
-
-exports.recaptcha_priv_key = 'YOUR_GOOGLE_RECAPTCHA_PRIVATE_KEY';
-exports.password_private_suffix = 'LONG_RANDOM_STRING1';
-exports.SSL_KEY = '../ssl_certificates/privkey.pem'; //change to your ssl certificates private key
-exports.SSL_CERT = '../ssl_certificates/fullchain.pem'; //change to your ssl certificates fullchain
-
-exports.walletspassphrase = {
-    'MC' : 'LONG_RANDOM_STRING2',
-    'BTC' : 'LONG_RANDOM_STRING3',
-    'DOGE' : 'LONG_RANDOM_STRING4'
-};
-```
-
-**You MUST change default value exports.password_private_suffix !**
 
 **After, you can run exchange**
 
@@ -156,5 +121,43 @@ Litecoin LTbDdTijroJEyXt27apQSnuMY4RoXyjdq2
 
 OpenTrade is released under the terms of the MIT license. See LICENSE for more information or see https://opensource.org/licenses/MIT.
 
+### Instalação em UBUNTU 16.04 Server Caseiro ###
+
+
+```
+apt-get update
+sudo apt install git -y unzip -y
+sudo apt-get install build-essential libssl-dev curl -y
+curl -sL https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh -o install_nvm.sh
+bash install_nvm.sh
+sudo reboot
+
+nvm install 12.6.0
+
+git clone --recurse-submodules https://github.com/3s3s/opentrade.git
+cd opentrade/accountsserver
+git checkout master
+cd ..
+
+npm install 
+npm install -g forever
+```
+## Procure pelo Arquivo ~/opentrade/server/modules/private_constants.js E Modifique tudo ao seu gosto.
+```
+'use strict';
+
+exports.recaptcha_priv_key = 'YOUR_GOOGLE_RECAPTCHA_PRIVATE_KEY';
+exports.password_private_suffix = 'LONG_RANDOM_STRING1';
+exports.SSL_KEY = '../ssl_certificates/privkey.pem'; //change to your ssl certificates private key
+exports.SSL_CERT = '../ssl_certificates/fullchain.pem'; //change to your ssl certificates fullchain
+
+exports.walletspassphrase = {
+    'MC' : 'LONG_RANDOM_STRING2',
+    'BTC' : 'LONG_RANDOM_STRING3',
+    'DOGE' : 'LONG_RANDOM_STRING4'
+};
+```
+
+**Obrigatorio modificar essa linha exports.password_private_suffix !**
 
 
